@@ -38,19 +38,19 @@ The factors used for simulation of spike trains are derived from a reach-to-gras
 
 ### Original Factors ###
 
-![](https://raw.githubusercontent.com/m053m716/PCA-Alignment-Cleaning/master/docs/Original_Factors.png)
+![](https://media.githubusercontent.com/media/Cortical-Plasticity-Lab/PCA-Alignment-Cleaning/master/docs/Original_Factors.png)
 
 _The original factors are scaled as coefficients between -1 and 1._
 
 ### Offset Factors ###
 
-![](https://raw.githubusercontent.com/m053m716/PCA-Alignment-Cleaning/master/docs/Offset_Factors.png)
+![](https://media.githubusercontent.com/media/Cortical-Plasticity-Lab/PCA-Alignment-Cleaning/master/docs/Offset_Factors.png)
 
 _Each factor offset is just to make them non-negative for all points, so that they can be scaled to physiologically plausible spike rate parameters._
 
 ### Scaled Factors ###
 
-![](https://raw.githubusercontent.com/m053m716/PCA-Alignment-Cleaning/master/docs/Scaled_Factors.png)
+![](https://media.githubusercontent.com/media/Cortical-Plasticity-Lab/PCA-Alignment-Cleaning/master/docs/Scaled_Factors.png)
 
 _After the offset, factors are rescaled so that their units change to spikes/second. All subsequent simulations are weighted combinations of these four factors._
 
@@ -60,12 +60,12 @@ _After the offset, factors are rescaled so that their units change to spikes/sec
 
 ### Simulated Rate Trial Overlays ###
 
-![](https://raw.githubusercontent.com/m053m716/PCA-Alignment-Cleaning/master/docs/Example_Original_Output.png)
+![](https://media.githubusercontent.com/media/Cortical-Plasticity-Lab/PCA-Alignment-Cleaning/master/docs/Example_Original_Output.png)
 
 Here is an example of fairly noisy data with jitter on the order of 20-ms (low-noise case) up to 120-ms (high-noise case) for a realistic number of trials (N = 25). Each semi-opaque trajectory represents an individual trial for that recording "channel," which is some weighted combination of the **[scaled factors](#Scaled-Factors)** Note that particularly in rehabilitation experiments, it is difficult to get a high number of trials for a variety of reasons, but particularly if the animal belongs to an injury group they may not be very motivated to perform hundreds of behavioral trials.
 
 ### Cleaned Rate Trial Overlays ###
 
-![](https://raw.githubusercontent.com/m053m716/PCA-Alignment-Cleaning/master/docs/Example_Cleaned_Output.png)
+![](https://media.githubusercontent.com/media/Cortical-Plasticity-Lab/PCA-Alignment-Cleaning/master/docs/Example_Cleaned_Output.png)
 
 Using the same **[simulated data](#simulated-rate-trial-overlays)**, we retain the top-3 (_top: low-noise_) or top-7 (_bottom: high-noise_) principal components and reconstruct the simulated spike rates. The number of principal components is set using a threshold based on the total percent of the variance explained by the retained principal components. **Part of the goal of this small project is to identify a "robust" surface manifold based on parameters such as the number of channels, number of trials, noise parameters, and total number of "generative" factors present for spike rates.**
