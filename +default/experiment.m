@@ -9,8 +9,9 @@ function varargout = experiment(varargin)
 p = struct;
 % % Main experiment parameters go here % %
 p.mask = [-1000  500]; % Allows jitter in timing
-% p.n_component = 4;     % Default number of reconstruction components
-p.var_capt = 99;
+p.n_component = 4;     % Default number of reconstruction components
+p.var_capt = 99;       % Default proportion of variance captured by PCs
+p.n_factor = 6;        % Default number of `factoran` factors
 
 % % Parameter "grid" to sweep % %
 p.all_sigmas_jitter = [  10,  30,  60]; % Jitter in alignment timing

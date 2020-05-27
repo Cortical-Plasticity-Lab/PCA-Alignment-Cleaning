@@ -1,7 +1,7 @@
-function x = rate(t,t_lim,factors,combo,N,nTrials,plot_params)
+function x = rate(t,t_lim,factors,combo,N,t_shift,plot_params)
 %RATE Simulates individual "channel" spike rate using factor & noise
 %
-%  x = data.sim.rate(t,t_lim,factors,combo,N,nTrials);
+%  x = data.sim.rate(t,t_lim,factors,combo,N,t_shift);
 %  x = data.sim.rate(__,plot_params);
 %
 %  -- Inputs --
@@ -12,7 +12,7 @@ function x = rate(t,t_lim,factors,combo,N,nTrials,plot_params)
 %  N        : Struct with fields containing Normal pdf for noise sources.
 %                 * 'jitter' and 
 %                 * 'rate' 
-%  nTrials  : Number of trials to replicate this process for
+%  t_shift  : Jitter for the number of trials to replicate this process
 %  -- (Optional) --
 %  plot_params : Cell array of 'Name', value pairs for modifying `lines`
 %                    associated with this set of simulations.
@@ -34,10 +34,12 @@ if numel(combo) > 1
    x = table.empty();
    for ii = 1:numel(combo)
       x = [x; ...
-         data.sim.rate(t,t_lim,factors,combo(ii),N,nTrials,plot_params)]; %#ok<AGROW>
+         data.sim.rate(t,t_lim,factors,combo(ii),N,t_shift,plot_params)]; %#ok<AGROW>
    end
    return;
 end
+
+nTrials = numel(t_shift);
 
 % Get the total number of masked samples that should be present
 samples_mask = (t >= t_lim(1)) & (t < t_lim(2));
@@ -50,7 +52,6 @@ nSamples_orig = size(factors,2);
 t_orig = repmat(t',1,nTrials);
 
 % Induce time-shift due to "misalignment" of data to actual time
-t_shift = random(N.jitter,[1,nTrials]); 
 t_align = t_orig + t_shift;
 
 % Retrieve equal number of samples for each "trial" after misalignment
