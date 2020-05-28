@@ -30,6 +30,9 @@ Z.Properties.Description = 'Table of trials concatenated by channel';
 Z.Properties.UserData = Y.Properties.UserData;
 Z.Properties.UserData.Type = 'trials';
 Z.Properties.UserData.iTrial = cell2mat(iTrial);
+Z.Properties.UserData.Correction = Y.Correction;
+Z.Properties.UserData.AlignMask = Y.AlignMask;
+Z.Properties.UserData.Original = Y.Original;
 varargout = {Z};
 
    function [data_out,iTrial] = rate_concat(data_in,iTrial)

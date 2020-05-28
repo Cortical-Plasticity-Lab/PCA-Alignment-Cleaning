@@ -1,7 +1,7 @@
 function factors = transform_factors(factors,w,o,s)
 %TRANSFORM_FACTORS Apply offset and scaling to factors for Poisson process
 %
-%  factors = data.transform_factors(factors,w,o,s);
+%  factors = data.process.transform_factors(factors,w,o,s);
 %
 %  -- Inputs --
 %  factors : Matrix where rows are normalized factors and columns = samples

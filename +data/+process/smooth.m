@@ -46,7 +46,7 @@ X = varargin{1};
 X.Rate = sgolayfilt(X.Rate,pars.order,pars.framelen,pars.weights,2);
 X.Properties.UserData.SmoothFcn = ...
    @(Rate)sgolayfilt(Rate,pars.order,pars.framelen,pars.weights,2);
+X = utils.addTag(X,'Smoothed');
 varargout{1} = X;
-
 end
 

@@ -6,7 +6,7 @@
 %  <a href="matlab:opentoline('main.mlx',1,1);">main</a> - Matlab live script for visualization & exploration
 %
 % Packages
-%  <a href="matlab:help data">data</a> - Contains sub-packages for simulation & data processing
+%  <a href="matlab:help data">data</a> - Contains packages for simulation, figure generation, processing etc
 %  <a href="matlab:help default">default</a> - Contains files with default parameter settings
 %  <a href="matlab:help utils">utils</a> - Contains miscellaneous utility functions
 %

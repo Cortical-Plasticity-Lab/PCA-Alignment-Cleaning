@@ -1,9 +1,9 @@
-function N = noise(varargin)
+function [N,R] = noise(varargin)
 %NOISE Create struct of Zero-Mean White Gaussian Noise distributions
 %
-%  N = data.sim.noise(varargin);
+%  [N,R] = data.sim.noise(varargin);
 %  e.g.
-%  >> N = data.sim.noise('D1',sd_jit1,sd_rate1,'D2',sd_jit2,sd_rate2);
+%  >> [N,R] = data.sim.noise('D1',sd_jit1,sd_rate1,'D2',sd_jit2,sd_rate2);
 %     * Result: struct e.g. N.Low.jitter ~ N(0,sd_jit1); % etc.
 %
 %  -- Inputs --
@@ -15,6 +15,7 @@ function N = noise(varargin)
 %  -- Output --
 %  N : Noise struct with pdf objects for sub-fields of tagged "labeled"
 %        main fields.
+%  R : Distribution for adding in regularization noise
 
 N = struct;
 for iV = 1:3:numel(varargin)
@@ -27,5 +28,8 @@ for iV = 1:3:numel(varargin)
       'sigma',varargin{iV+2});
       
 end
+R = makedist('Normal',...
+   'mu',0,...
+   'sigma',default.experiment('sigma_regularizer'));
 end
 

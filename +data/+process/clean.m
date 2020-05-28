@@ -58,10 +58,16 @@ for iCh = 1:nCh
 end
 
 Trial = repmat((1:nTrial).',nCh,1);
-
-C = table(Trial,iFactor,wFactor,oFactor,sFactor,iChannel,Offset,Rate);
+Correction = u.Correction;
+u = rmfield(u,'Correction');
+AlignMask = u.AlignMask;
+u = rmfield(u,'AlignMask');
+Original = u.Original;
+u = rmfield(u,'Original');
+C = table(Trial,iFactor,wFactor,oFactor,sFactor,iChannel,Offset,Rate,Original,AlignMask,Correction);
 C.Properties.UserData = u;
 C.Properties.UserData.Type = 'channels';
+C = utils.addTag(C,'Concat-Cleaned');
 C.Properties.UserData.plot_params{4} = ...
    sprintf('%s | %g PCs',C.Properties.UserData.plot_params{4},nComponents);
 varargout = {C};

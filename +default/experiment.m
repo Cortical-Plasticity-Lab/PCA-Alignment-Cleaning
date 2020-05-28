@@ -5,6 +5,29 @@ function varargout = experiment(varargin)
 %  default.experiment('param_name'); % Print to command window
 %  param = default.experiment('param_name');
 %  [v1,v2,...,vk] = default.experiment('v1_name','v2_name',...,'vk_name');
+%
+% Current <strong>experiment</strong> parameters
+%
+%  mask = [-1000  500]; % Allows jitter in timing
+%  n_component = 4;     % Default number of reconstruction components
+%  var_capt = 99;       % Default proportion of variance captured by PCs
+%  n_factor = 6;        % Default number of `factoran` factors
+%
+%  all_num_channels  = [  16,  32,  64]; % Number of channels in data
+%  all_num_trials    = 15:5:30;    % Number of trials
+%  all_factors       = 1:4;        % Number of factors present 
+%  all_sigmas_jitter = 10:10:100;  % Jitter in alignment timing
+%  all_sigmas_rate   = [1, 5, 10]; % Random noise on factors
+%
+%  factor_offset = [0.75; 0.95; 0.80; 0.45]; % Offsets for factor transform
+%  factor_scale = [10; 20; 5; 15]; % Scale coeffs for factor transform
+%
+%  smooth_order = 3;       % Order of Savitzky-golay smooth filter
+%  smooth_framelen = 601;  % Frame length of Savitzky-golay smooth filter
+%  smooth_weights = hamming(p.smooth_framelen).'; % Weights of SG filter
+% 
+%  corr_max_lag = 150; % For offset correlation: maximum lag offset
+%  corr_period = 30;   % For offset correlation: lag sample period
 
 p = struct;
 % % Main experiment parameters go here % %
@@ -14,11 +37,11 @@ p.var_capt = 99;       % Default proportion of variance captured by PCs
 p.n_factor = 6;        % Default number of `factoran` factors
 
 % % Parameter "grid" to sweep % %
-p.all_sigmas_jitter = [  10,  30,  60]; % Jitter in alignment timing
-p.all_sigmas_noise  = [0.01, 0.1, 0.5]; % Random noise on factors
-p.all_factors       = [   2,   3,   4]; % Number of factors present 
 p.all_num_channels  = [  16,  32,  64]; % Number of channels in data
-p.all_num_trials    = [  20,  50, 100]; % Number of trials
+p.all_num_trials    = 15:5:30;    % Number of trials
+p.all_factors       = 1:4;        % Number of factors present 
+p.all_sigmas_jitter = 10:10:100;  % Jitter in alignment timing
+p.all_sigmas_rate   = [1, 5, 10]; % Random noise on factors
 
 % % For converting factors to rates % %
 p.factor_offset = [0.75; 0.95; 0.80; 0.45];
@@ -28,6 +51,11 @@ p.factor_scale = [10; 20; 5; 15];
 p.smooth_order = 3;
 p.smooth_framelen = 601;
 p.smooth_weights = hamming(p.smooth_framelen).';
+
+% % For estimating offsets % %
+p.corr_max_lag = 150;
+p.corr_period = 1;
+p.sigma_regularizer = 10;
 
 % % % Display defaults (if no input or output supplied) % % %
 if (nargin == 0) && (nargout == 0)
