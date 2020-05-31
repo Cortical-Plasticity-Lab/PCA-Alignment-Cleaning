@@ -55,7 +55,7 @@ p.smooth_weights = hamming(p.smooth_framelen).';
 % % For estimating offsets % %
 p.corr_max_lag = 150;
 p.corr_period = 1;
-p.sigma_regularizer = 10;
+p.sigma_regularizer = 50;
 
 % % % Display defaults (if no input or output supplied) % % %
 if (nargin == 0) && (nargout == 0)

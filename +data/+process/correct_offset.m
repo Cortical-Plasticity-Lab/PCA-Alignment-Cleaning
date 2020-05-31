@@ -72,7 +72,6 @@ varargout = {utils.addTag(C,'Offset-Corrected')};
       %        -> (nSamples - maskEnd) is the "most-negative" it could be
       %  ub - Upper bound on values allowed for shift (shift should be no
       %           larger than the starting index of mask vector - 1)
-      
       safe_shift = max(min(shift,ub),lb);
       shifted_indices = indices - safe_shift;
    end
